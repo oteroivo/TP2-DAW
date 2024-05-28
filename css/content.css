@@ -1,0 +1,132 @@
+.contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .contentContainer__leftSide {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contentContainer__leftSide div {
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .contentContainer__leftSide img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+  
+  .contentContainer__mainContent {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .contentContainer__mainContent h1 {
+    text-align: center;
+    font-size: 50px;
+  }
+  
+  .contentContainer__mainContent__news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .contentContainer__mainContent__news__content {
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .contentContainer__mainContent__news__content img {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .contentContainer__mainContent__news__info {
+    padding: 20px;
+  }
+  
+  .contentContainer__mainContent__news__info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .contentContainer__mainContent__news__info p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+  }
+  
+  .contentContainer__rightSide {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contentContainer__rightSide__weatherWidget {
+    width: 100%;
+    max-width: 300px;
+    max-height: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    border: 1px solid grey;
+  }
+  
+  .contentContainer__rightSide__weatherWidget h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .contentContainer__rightSide__weatherWidget img {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+  }
+  
+  .contentContainer__rightSide__weatherWidget__wheaterInfo {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .contentContainer__rightSide__weatherWidget__description {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .contentContainer__leftSide {
+      width: 20%;
+      padding: 20px;
+    }
+  
+    .contentContainer__mainContent {
+      width: 50%;
+      padding: 20px;
+    }
+  
+    .contentContainer__mainContent__news__content {
+      margin: 10px;
+    }
+  
+    .contentContainer__rightSide {
+      width: 20%;
+      padding: 20px;
+    }
+  }
