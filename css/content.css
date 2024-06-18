@@ -73,11 +73,24 @@
   .contentContainer__rightSide {
     width: 100%;
     padding: 20px;
-    display: flex;
+    display: inline-block;
     justify-content: center;
+  }
+
+  .contentContainer__rightSide__subscriptionButton {
+    background-color: #FF69B4;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
   }
   
   .contentContainer__rightSide__weatherWidget {
+    margin-top: 20px;
     width: 100%;
     max-width: 300px;
     max-height: 400px;
