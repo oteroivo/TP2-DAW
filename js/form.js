@@ -16,10 +16,12 @@ const closeModal = document.getElementsByClassName('close')[0];
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  showModal();
-  
+  sendForm();
 });
 
+window.onload = function() {
+  loadDataFromLocalStorage();
+};
 
 nameInput.addEventListener('blur', validateName);
 nameInput.addEventListener('focus', clearError);
@@ -186,32 +188,77 @@ function validateForm() {
          isPostalCodeValid && isDNIValid;
 }
 
-function showModal() {
-  const name = nameInput.value;
-  const email = emailInput.value;
-  const age = ageInput.value;
-  const phone = phoneInput.value;
-  const address = addressInput.value;
-  const city = cityInput.value;
-  const postalCode = postalCodeInput.value;
-  const dni = dniInput.value;
-
-  modal.style.display = 'block';
-
+function sendForm() {
   if (validateForm()) {
-    return modalInfo.innerHTML = `
-    <p><strong>Nombre:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Edad:</strong> ${age}</p>
-    <p><strong>Teléfono:</strong> ${phone}</p>
-    <p><strong>Dirección:</strong> ${address}</p>
-    <p><strong>Ciudad:</strong> ${city}</p>
-    <p><strong>Código Postal:</strong> ${postalCode}</p>
-    <p><strong>DNI:</strong> ${dni}</p>
-  `;
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const age = ageInput.value;
+    const phone = phoneInput.value;
+    const address = addressInput.value;
+    const city = cityInput.value;
+    const postalCode = postalCodeInput.value;
+    const dni = dniInput.value;
+
+    const data = {
+      name: name,
+      email: email,
+      age: age,
+      phone: phone,
+      address: address,
+      city: city,
+      postalCode: postalCode,
+      dni: dni
+    };
+
+    fetch('https://jsonplaceholder.typicode.com/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      showModal(data, true);
+      saveDataToLocalStorage(data);
+    })
+    .catch(error => {
+      showModal(error, false);
+    });
+  }
+}
+
+function showModal(data, success) {
+  let message = '';
+  if (success) {
+    message = 'Subscripcion completada:<br>';
+    message += JSON.stringify(data);
+  } else {
+    message = 'Error al subscribrirse. Error:<br>';
+    message += JSON.stringify(data);
   }
 
-  modalInfo.innerHTML = 'Debe corregir los errores del formulario'
+  modalInfo.innerHTML = message;
+  modal.style.display = 'block';
+}
+
+function saveDataToLocalStorage(data) {
+  localStorage.setItem('newsletterData', JSON.stringify(data));
+}
+
+function loadDataFromLocalStorage() {
+  const savedData = localStorage.getItem('newsletterData');
+  if (savedData) {
+    const data = JSON.parse(savedData);
+    nameInput.value = data.name;
+    emailInput.value = data.email;
+    ageInput.value = data.age;
+    phoneInput.value = data.phone;
+    addressInput.value = data.address;
+    cityInput.value = data.city;
+    postalCodeInput.value = data.postalCode;
+    dniInput.value = data.dni;
+  }
 }
 
 function closeModalWindow() {
